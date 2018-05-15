@@ -13,42 +13,37 @@ var config = require('../common/config.js');
 
 var qrcode = {
 
-	_parse: function(qrCodeFilePath){
-		fs.readFile(qrCodeFilePath, function(err, data) {
-		    if (err) throw err;
-		    var img = new Canvas.Image; // Create a new Image
-		    img.src = data;	
+	_parse: function(qrCodeFilePath, cb){
+			fs.readFile(qrCodeFilePath, function(err, data) {
+	    if (err) throw err;
+	    var img = new Canvas.Image; // Create a new Image
+	    img.src = data;	
 			    
 			// Initialiaze a new Canvas with the same dimensions
 		    // as the image, and get a 2D drawing context for it.
-		    var canvas = new Canvas(img.width, img.height);
-		    var ctx = canvas.getContext('2d');
-		    ctx.drawImage(img, 0, 0, img.width, img.height);
-		    var imageData = ctx.getImageData(0, 0, img.width, img.height);
-		    const code = jsQR(imageData.data, img.width, img.height);
-
+	    var canvas = new Canvas(img.width, img.height);
+	    var ctx = canvas.getContext('2d');
+	    ctx.drawImage(img, 0, 0, img.width, img.height);
+	    var imageData = ctx.getImageData(0, 0, img.width, img.height);
+	    const code = jsQR(imageData.data, img.width, img.height);
 			if (code) {
 				var qrCodeUrl = code.data;
 				// parses the request url
-			    var theUrl = url.parse( qrCodeUrl );
-			    // gets the query part of the URL and parses it creating an object
-			    var queryObj = queryString.parse( theUrl.query );
-			    var uuid = queryObj.uuid;
-			  	return uuid;
+		    var theUrl = url.parse( qrCodeUrl );
+		    // gets the query part of the URL and parses it creating an object
+		    var queryObj = queryString.parse( theUrl.query );
+		    var uuid = queryObj.uuid;
+		  	cb(null, uuid);
+			}else {
+				cb("no uuid");
 			}
-			return null;
 		});
 	},
 
 	scan: function(qrCodeFilePath, cb) {
 		async.waterfall([
 			function (callback) {
-				var uuid = qrcode._parse(qrCodeFilePath);
-				if (uuid != null) {
-					callback(null, uuid);
-				}else {
-					callback('no uuid');
-				}
+				qrcode._parse(qrCodeFilePath, callback);
 			},
 			function(uuid, callback){
 				console.log(uuid)
@@ -94,7 +89,7 @@ var qrcode = {
 					headers: config.headers,
 					form: form
 				};
-				_.extend(options, {'Content-Length': Buffer.byteLength(querystring.stringify(form)});
+				_.extend(options, {'Content-Length': Buffer.byteLength(querystring.stringify(form))});
 				console.log(options);
 				request.get(options, callback);
 			}
