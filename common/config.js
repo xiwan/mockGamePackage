@@ -1,7 +1,7 @@
 'use strict'
 
 var config = {}
-config.qrCodeFilePath = '/Users/xi.wan/Documents/dev/mockGamePackage/public/images/WechatIMG285.jpeg';
+config.qrCodeFilePath = '/Users/xiwan/Downloads/webwxgetmsgimg.jpeg';
 config.host = 'https://gamebox.webapp.163.com';
 
 config.routes = {
@@ -21,13 +21,15 @@ config.app = {
 
 
 config.headers = {
-	'Connection': 'keep-alive',
-	'Accept': '*/*',
-	'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E302 MicroMessenger/6.6.6 NetType/WIFI Language/en',
-	'Content-Type': 'application/x-www-form-urlencoded',
-	'Referer': 'http:s://servicewechat.com/wxe6d53c9396761c4a/23/page-frame.html',
-	'Accept-Language': 'en-us',
-	'Accept-Encoding': 'br, gzip, deflate'
+	'connection': 'keep-alive',
+	'accept': '*/*',
+	'user-agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E302 MicroMessenger/6.6.6 NetType/WIFI Language/en',
+	'content-type': 'application/x-www-form-urlencoded',
+	'referer': 'https://servicewechat.com/wxe6d53c9396761c4a/23/page-frame.html',
+	'accept-language': 'en-us',
+	'accept-encoding': 'br, gzip, deflate'
 }
+
+
 
 module.exports = config;

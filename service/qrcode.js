@@ -46,18 +46,18 @@ var qrcode = {
 				qrcode._parse(qrCodeFilePath, callback);
 			},
 			function(uuid, callback){
-				console.log(uuid)
 				var cv = '&cv=' + config.app.cv;
 				var ci = '&ci=' + config.app.ci;
 				var cp = '&cp='	+ config.app.cp;
 				var uuid = 'uuid=' + uuid;
-				var qrcodeScan = config.routes.qrcodeScan+'?'+uuid+cp+ci+cv;
-				console.log(qrcodeScan);
-
+				var params = uuid+cp+ci+cv;
+				var qrcodeScan = config.routes.qrcodeScan+'?'+params;
 				var options = {
 					url: qrcodeScan,
 					headers: config.headers
 				};
+				_.extend(options.headers, {'content-length': Buffer.byteLength(queryString.stringify(params))});
+				console.log(options);
 				request.get(options, callback);
 			}
 		], cb);
@@ -89,9 +89,9 @@ var qrcode = {
 					headers: config.headers,
 					form: form
 				};
-				_.extend(options, {'Content-Length': Buffer.byteLength(querystring.stringify(form))});
+				_.extend(options.headers, {'content-length': Buffer.byteLength(queryString.stringify(form)) });
 				console.log(options);
-				request.get(options, callback);
+				request.post(options, callback);
 			}
 		], cb);
 

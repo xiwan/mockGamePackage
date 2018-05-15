@@ -12,12 +12,5 @@ utils.protectBlock = function(handler, params, next){
 	}
 };
 
-utils.finalCallback = function(err, results){
-  if (err) {
-    throw err;
-  } else {
-    res.send(results);
-  }
-}
 
 module.exports = utils;
