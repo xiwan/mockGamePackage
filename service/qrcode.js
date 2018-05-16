@@ -15,7 +15,9 @@ var qrcode = {
 
 	_parse: function(qrCodeFilePath, cb){
 			fs.readFile(qrCodeFilePath, function(err, data) {
-	    if (err) throw err;
+	    if (err) {
+	    	return cb(err);
+	    }
 	    var img = new Canvas.Image; // Create a new Image
 	    img.src = data;	
 			    
@@ -73,7 +75,7 @@ var qrcode = {
 				var iconUrl = qrcodeInfo.icon_url;	
 				
 				var form = {
-					token: config.app.token,
+					token: config.token[0],
 					uuid: uuid,
 					src_game_id: id,
 					device_id: config.app.device_id,

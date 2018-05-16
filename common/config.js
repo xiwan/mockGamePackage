@@ -2,12 +2,16 @@
 
 var config = {}
 config.qrCodeFilePath = '/Users/xiwan/Downloads/webwxgetmsgimg.jpeg';
-config.host = 'https://gamebox.webapp.163.com';
+
+config.host = {};
+config.host.gamebox = 'https://gamebox.webapp.163.com';
+config.host.service = 'https://service.mkey.163.com';
 
 config.routes = {
-	qrcodeScan: config.host + '/api/qrcode/scan',
-	confirmLogin: config.host + '/api/qrcode/confirm_login',
+	qrcodeScan: config.host.gamebox + '/api/qrcode/scan',
+	confirmLogin: config.host.service + '/api/qrcode/confirm_login',
 	loginRecords: '/api/security/login_records',
+	forRegister: '/mpay/games/$/devices/$/users?for_register=0',
 	test: '',	
 };
 
@@ -15,9 +19,13 @@ config.app = {
 	cv: '0.0.0',
 	ci: 'c30df810-867f-4d88-bfd7-40d0d7571afc',
 	cp: 'wx-i',
-	device_id: 'aeavvzoc2bycelbl-d',
-	token: 'aebfv3lqdi2hlhyi@1-eyJzIjogIjU3MTI3MDIzMmI2NGE2MzE1NTJlM2E5ZjMwNGQwYmRjIiwgInQiOiAxfSAg'	
+	device_id: 'aeavvzoc2bycelbl-d'	
 }
+
+config.token = [
+'aebfv3lqdi2hlhyi@1-eyJzIjogIjU3MTI3MDIzMmI2NGE2MzE1NTJlM2E5ZjMwNGQwYmRjIiwgInQiOiAxfSAg',
+'aebfmtcds4ekvm2t@1-eyJzIjogInlkXzIwMDAwMDAwOGU3NDZlZWNhODJmNGEyOWRiMGRkOTY3MDY3YzQ5OGUiLCAidCI6IDcsICJ1X2kiOiAiNjJGRDU0NDVEODA0NjdENTk0RDAyQTkwMTVGNjI2Qzk0QUYzREMwQUQwNEYyODVDRjkzODk0RjNBRTYwOEZBNTExOUMwQTI4RTkxRTFCOUJFODU0NzdEOTgxNkEyNUUxIn0g'
+];
 
 
 config.headers = {

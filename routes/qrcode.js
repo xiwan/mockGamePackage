@@ -3,6 +3,7 @@ var _ = require('lodash');
 var async = require('async');
 
 var config = require('../common/config.js');
+var masterdb = require('../common/masterdb.js');
 var qrcodeService = require('../service/qrcode.js');
 var utils = require('../common/utils.js');
 
@@ -10,19 +11,16 @@ var router = express.Router();
 
 /* POST sendQrcode. */
 router.post('/sendQrcode', function(req, res, next) {
-	// protectBlock
-	utils.protectBlock(function(req, res, next){
-		async.waterfall([
+	async.waterfall([
 
-		], 
-		function(err, results){
-		  if (err) {
-		    throw err;
-		  } else {
-		    res.send(results);
-		  }
-		});
-	}, arguments, next);
+	], 
+	function(err, results){
+	  if (err) {
+	    next(err);
+	  } else {
+	    res.send(results);
+	  }
+	});
 });
 
 /* POST autoLogin. */
@@ -56,12 +54,11 @@ router.post('/autoLogin', function(req, res, next) {
 	], 
 	function(err, results){
 	  if (err) {
-	    res.send(err)
+	    next(err)
 	  } else {
 	    res.send(results);
 	  }
-	});		
-
+	});
 });
 
 module.exports = router;
