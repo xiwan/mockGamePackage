@@ -17,8 +17,8 @@ var masterdb = {
 	}]
 }
 
-console.log(utils.md5(masterdb.accounts[0].username))
-console.log(utils.md5(masterdb.accounts[0].password))
-console.log(utils.md5(masterdb.accounts[0].token))
+// console.log(utils.md5(masterdb.accounts[0].username))
+// console.log(utils.md5(masterdb.accounts[0].password))
+// console.log(utils.md5(masterdb.accounts[0].token))
 
 module.exports = masterdb;
