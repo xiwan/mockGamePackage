@@ -2,6 +2,8 @@
 
 var config = {}
 config.qrCodeFilePath = '/Users/xiwan/Downloads/webwxgetmsgimg.jpeg';
+config.upload = {};
+config.upload.dest = '/Users/xiwan/Documents/uploads/'
 
 config.host = {};
 config.host.gamebox = 'https://gamebox.webapp.163.com';

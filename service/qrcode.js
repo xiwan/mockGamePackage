@@ -65,7 +65,7 @@ var qrcode = {
 		], cb);
 	},
 
-	confirmLogin: function(qrcodeInfo, cb){
+	confirmLogin: function(qrcodeInfo, qrToken, cb){
 		async.waterfall([
 			function (callback) {
 				var uuid = qrcodeInfo.uuid;
@@ -75,7 +75,7 @@ var qrcode = {
 				var iconUrl = qrcodeInfo.icon_url;	
 				
 				var form = {
-					token: config.token[0],
+					token: qrToken||config.token[0],
 					uuid: uuid,
 					src_game_id: id,
 					device_id: config.app.device_id,
