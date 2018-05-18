@@ -18,6 +18,7 @@ var qrcode = {
 	    if (err) {
 	    	return cb(err);
 	    }
+	    console.log(qrCodeFilePath)
 	    var img = new Canvas.Image; // Create a new Image
 	    img.src = data;	
 			    
@@ -42,7 +43,15 @@ var qrcode = {
 		});
 	},
 
-	scan: function(qrCodeFilePath, cb) {
+	autoLogin: function(qrCodeFilePath, qrToken, cb){
+		var form = {
+			qrCodeFilePath: qrCodeFilePath,
+			qrToken: qrToken
+		};
+		request.post({url: config.routes.autoLogin, form: form}, cb);
+	},
+
+	scanImage: function(qrCodeFilePath, cb) {
 		async.waterfall([
 			function (callback) {
 				qrcode._parse(qrCodeFilePath, callback);

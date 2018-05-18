@@ -33,11 +33,18 @@ router.post('/upload', upload.single('qrImage'),function(req, res, next) {
 			}
 			var targetAccount = accounts[0];
 			var qrImage = req.file;
-			callback(null, targetAccount, qrImage.path);
+			callback(null, qrImage.path, targetAccount.token);
 		},
-		function (account, qrImagePath, callback) {
-
-			callback(null, qrImagePath);
+		function (qrImagePath, qrToken, callback) {
+			qrcodeService.autoLogin(qrImagePath, qrToken, function(err, response, body) {
+			  if (!err && response.statusCode == 200) {
+					var info = JSON.parse(body);
+				  console.log(info);
+			    callback(null, info); 
+			  } else {
+			    callback(err);
+			  }
+			});
 		}
 	], 
 	function(err, results){
@@ -51,42 +58,44 @@ router.post('/upload', upload.single('qrImage'),function(req, res, next) {
 
 /* POST autoLogin. */
 router.post('/autoLogin', function(req, res, next) {
+	var qrCodeFilePath = req.body.qrCodeFilePath;
+	if (qrCodeFilePath == null) {
+		return next("no_qrcode_found");
+	}
+	var qrToken = req.body.qrToken;
+	if (qrToken == null) {
+		return next("no_token_found");
+	}
+
 	async.waterfall([
-		function (callback) {
-			var qrCodeFilePath = req.body.qrCodeFilePath;
-			if (qrCodeFilePath == null) {
-				return callback("no_qrcode_found");
-			}
-			var qrToken = req.body.qrToken;
-			if (qrToken == null) {
-				return callback("no_token_found");
-			}
-			callback(null, qrCodeFilePath, token);
-		}
-		function (qrCodeFilePath, qrToken, callback) { // qrcodeService.scan
-			qrcodeService.scan(qrCodeFilePath, function(err, response, body){
-				if (!err && response.statusCode == 200) {
-					var info = JSON.parse(body);
-					console.log(info)
-					if (info.code == 0) {
-						callback(null, info.qrcode_info, qrToken);
-					}else {
-						callback(info);
-					}
-				} else {
-					callback(err);
-				}
+		function (callback) { 
+			// qrcodeService.scanImage
+			qrcodeService.scanImage(qrCodeFilePath, function(err, response, body) {
+			  if (!err && response.statusCode == 200) {
+			  	var info = JSON.parse(body);
+			  	console.log(info);
+			    callback(null, info); 
+			  } else {
+			    callback(err);
+			  }
 			});
 		},
-		function (qrcodeInfo, qrToken, callback) { // qrcodeService.confirmLogin
-			qrcodeService.confirmLogin(qrcodeInfo, qrToken, function(err, response, body) {
-				if (!err && response.statusCode == 200) {
-					var info = JSON.parse(body);
-					callback(null, info);	
-				} else {
-					callback(err);
-				}
-			});
+
+		function (info, callback) { 
+			if (info.code == 0) {
+				// qrcodeService.confirmLogin
+				qrcodeService.confirmLogin(info.qrcode_info, qrToken, function(err, response, body) {
+				  if (!err && response.statusCode == 200) {
+						var info = JSON.parse(body);
+					  console.log(info);
+				    callback(null, info); 
+				  } else {
+				    callback(err);
+				  }
+				});
+			}else {
+				callback(null, info);
+			}
 		}
 	], 
 	function(err, results){

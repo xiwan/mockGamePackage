@@ -3,17 +3,19 @@
 var config = {}
 config.qrCodeFilePath = '/Users/xiwan/Downloads/webwxgetmsgimg.jpeg';
 config.upload = {};
-config.upload.dest = '/Users/xiwan/Documents/uploads/'
+config.upload.dest = '/Users/xi.wan/Documents/uploads/'
 
 config.host = {};
 config.host.gamebox = 'https://gamebox.webapp.163.com';
 config.host.service = 'https://service.mkey.163.com';
+config.host.local = 'http://localhost:3000';
 
 config.routes = {
 	qrcodeScan: config.host.gamebox + '/api/qrcode/scan',
-	confirmLogin: config.host.service + '/api/qrcode/confirm_login',
+	confirmLogin: config.host.gamebox + '/api/qrcode/confirm_login',
 	loginRecords: '/api/security/login_records',
 	forRegister: '/mpay/games/$/devices/$/users?for_register=0',
+	autoLogin: config.host.local + '/qrcode/autoLogin',
 	test: '',	
 };
 
