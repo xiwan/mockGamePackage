@@ -22,12 +22,13 @@ config.routes = {
 
 config.app = {
 	cv: '0.0.0',
-	ci: 'c30df810-867f-4d88-bfd7-40d0d7571afc',
+	ci: 'c6d25bf2-75c0-42b1-b4c5-cedd487d881a',
 	cp: 'wx-i',
-	device_id: 'aeavvzoc2bycelbl-d'	
+	device_id: 'aeavv77ncrzwjqql-d'	
 }
 
 config.token = [
+	'aebfusjdkawivcgy@1-eyJzIjogImY5YjRjMDQ3YjM3YmQ3ODY5ZWNlYzExMzhmMjQ1YTM5IiwgInQiOiAxfSAg',
 	'aebfv3lqdi2hlhyi@1-eyJzIjogIjU3MTI3MDIzMmI2NGE2MzE1NTJlM2E5ZjMwNGQwYmRjIiwgInQiOiAxfSAg',
 	'aebfmtcds4ekvm2t@1-eyJzIjogInlkXzIwMDAwMDAwOGU3NDZlZWNhODJmNGEyOWRiMGRkOTY3MDY3YzQ5OGUiLCAidCI6IDcsICJ1X2kiOiAiNjJGRDU0NDVEODA0NjdENTk0RDAyQTkwMTVGNjI2Qzk0QUYzREMwQUQwNEYyODVDRjkzODk0RjNBRTYwOEZBNTExOUMwQTI4RTkxRTFCOUJFODU0NzdEOTgxNkEyNUUxIn0g'
 ];

@@ -2,6 +2,7 @@ var express = require('express');
 var _ = require('lodash');
 var async = require('async');
 var multer = require('multer');
+var path = require('path');
 
 var config = require('../common/config.js');
 var masterdb = require('../common/masterdb.js');
@@ -29,7 +30,7 @@ var upload = multer({
     callback(null, true);
   },
   limits:{
-		fileSize: 2 * 1024
+		fileSize: 2 * 1024 * 1024
   }});
 
 /* POST upload. */
