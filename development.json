@@ -2,7 +2,7 @@
   // Comments are supported
     "uid": "qrcode",
     "append": true,
-    "watch": true,
+    "watch": false,
     "script": "./bin/www",
     "sourceDir": "/Users/xiwan/Documents/dev/mockGamePackage"
 }
