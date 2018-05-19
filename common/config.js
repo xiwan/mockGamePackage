@@ -1,20 +1,22 @@
 'use strict'
 
+var env = process.env.NODE_ENV;
+
 var config = {}
 config.qrCodeFilePath = '/Users/xiwan/Downloads/webwxgetmsgimg.jpeg';
 config.upload = {};
-config.upload.dest = '/Users/xi.wan/Documents/uploads/'
+config.upload.dest = (env == 'development'?'/Users/xi.wan/Documents/uploads/':'/home/uploads/');
 
 config.host = {};
 config.host.gamebox = 'https://gamebox.webapp.163.com';
 config.host.service = 'https://service.mkey.163.com';
-config.host.local = 'http://localhost:3000';
+config.host.local = (env == 'development'?'http://localhost:3000':'http://118.25.187.134:3000');
 
 config.routes = {
 	qrcodeScan: config.host.gamebox + '/api/qrcode/scan',
 	confirmLogin: config.host.gamebox + '/api/qrcode/confirm_login',
-	loginRecords: '/api/security/login_records',
-	forRegister: '/mpay/games/$/devices/$/users?for_register=0',
+	loginRecords: config.host.service + '/api/security/login_records',
+	forRegister: config.host.service + '/mpay/games/$/devices/$/users?for_register=0',
 	autoLogin: config.host.local + '/qrcode/autoLogin',
 	test: '',	
 };
@@ -27,8 +29,8 @@ config.app = {
 }
 
 config.token = [
-'aebfv3lqdi2hlhyi@1-eyJzIjogIjU3MTI3MDIzMmI2NGE2MzE1NTJlM2E5ZjMwNGQwYmRjIiwgInQiOiAxfSAg',
-'aebfmtcds4ekvm2t@1-eyJzIjogInlkXzIwMDAwMDAwOGU3NDZlZWNhODJmNGEyOWRiMGRkOTY3MDY3YzQ5OGUiLCAidCI6IDcsICJ1X2kiOiAiNjJGRDU0NDVEODA0NjdENTk0RDAyQTkwMTVGNjI2Qzk0QUYzREMwQUQwNEYyODVDRjkzODk0RjNBRTYwOEZBNTExOUMwQTI4RTkxRTFCOUJFODU0NzdEOTgxNkEyNUUxIn0g'
+	'aebfv3lqdi2hlhyi@1-eyJzIjogIjU3MTI3MDIzMmI2NGE2MzE1NTJlM2E5ZjMwNGQwYmRjIiwgInQiOiAxfSAg',
+	'aebfmtcds4ekvm2t@1-eyJzIjogInlkXzIwMDAwMDAwOGU3NDZlZWNhODJmNGEyOWRiMGRkOTY3MDY3YzQ5OGUiLCAidCI6IDcsICJ1X2kiOiAiNjJGRDU0NDVEODA0NjdENTk0RDAyQTkwMTVGNjI2Qzk0QUYzREMwQUQwNEYyODVDRjkzODk0RjNBRTYwOEZBNTExOUMwQTI4RTkxRTFCOUJFODU0NzdEOTgxNkEyNUUxIn0g'
 ];
 
 
