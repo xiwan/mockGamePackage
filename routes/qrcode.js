@@ -59,7 +59,7 @@ router.post('/upload', upload.single('qrImage'),function(req, res, next) {
 /* POST autoLogin. */
 router.post('/autoLogin', function(req, res, next) {
 	var qrCodeFilePath = "";
-	ar qrToken = "";
+	var qrToken = "";
 	async.waterfall([
 		function (callback) { 
 			qrCodeFilePath = req.body.qrCodeFilePath;
