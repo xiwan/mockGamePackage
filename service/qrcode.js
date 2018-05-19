@@ -18,7 +18,7 @@ var qrcode = {
 	    if (err) {
 	    	return cb(err);
 	    }
-	    console.log(qrCodeFilePath)
+	    console.log(qrCodeFilePath);
 	    var img = new Canvas.Image; // Create a new Image
 	    img.src = data;	
 			    
