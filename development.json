@@ -1,0 +1,8 @@
+{
+  // Comments are supported
+    "uid": "qrcode",
+    "append": true,
+    "watch": true,
+    "script": "./bin/www",
+    "sourceDir": "/Users/xiwan/Documents/dev/mockGamePackage"
+}
