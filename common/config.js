@@ -3,9 +3,8 @@
 var env = process.env.NODE_ENV;
 
 var config = {}
-config.qrCodeFilePath = '/Users/xiwan/Downloads/webwxgetmsgimg.jpeg';
 config.upload = {};
-config.upload.dest = (env == 'development'?'/Users/xi.wan/Documents/uploads/':'/home/uploads/');
+config.upload.dest = (env == 'development'?'/Users/xiwan/Documents/uploads/':'/home/uploads/');
 
 config.host = {};
 config.host.gamebox = 'https://gamebox.webapp.163.com';
